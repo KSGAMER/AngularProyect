@@ -6,7 +6,8 @@ import { IngredientsService } from "./ingredients.service";
 
 @Injectable() // Decorador para poder agregar un servicio dentro de otro
 export class RecipeService {
-    recipeSelected = new EventEmitter<Recipe>();
+    //recipeSelected = new EventEmitter<Recipe>();
+
     
     private recipes: Recipe[] = [
         new Recipe('A test recipe 1', 'This is a simply test ', 'https://www.ngenespanol.com/wp-content/uploads/2018/08/%C2%BFEs-m%C3%A1s-sano-desayunar-pizza-o-cereal.png', 
@@ -29,6 +30,10 @@ export class RecipeService {
 
       getRecipes(){
           return this.recipes.slice();
+      }
+
+      getRecipe(index: number) {
+        return this.recipes[index];
       }
 
       //Metodo para invocar desde la vista
