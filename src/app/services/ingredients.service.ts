@@ -1,9 +1,8 @@
 import { Ingredient } from "../shared/ingredient.model";
 import { EventEmitter } from "@angular/core";
-import { Subject, Subscription } from "rxjs";
+import { Subject } from "rxjs";
 
 export class IngredientsService {
-    // ingredientsChanged = new EventEmitter<Ingredient[]>();
     ingredientsChanged = new Subject<Ingredient[]>();
     startedEditing = new Subject<number>();
     private ingredients: Ingredient[] = [
@@ -15,13 +14,8 @@ export class IngredientsService {
         return this.ingredients.slice();
     }
 
-    getIngredient(index: number) {
+    getIngredient(index: number){
         return this.ingredients[index];
-    }
-
-    updateIngredient(index: number, ingredient: Ingredient) {
-        this.ingredients[index] = ingredient;
-        this.ingredientsChanged.next(this.ingredients.slice());
     }
 
     addIngredient(ingredient: Ingredient) {
@@ -29,19 +23,22 @@ export class IngredientsService {
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 
+    //Una vez obtenidos se deben guardar en el arreglo, con un foreach donde se obtiene el objeto con una constante i
     addIngredients(auxIngredients: Ingredient[]) {
         for (const i of auxIngredients) {
-            if(this.ingredients.find(variable => variable.name == i.name)){
-                this.ingredients.find(variable => variable.name == i.name).amount = this.ingredients.find(variable => variable.name == i.name).amount + i.amount;
-            }else{
-                this.ingredients.push(i);
-            }
+            (this.ingredients.find(element => element.name==i.name))?this.ingredients.find(element => element.name==i.name).amount=this.ingredients.find(element => element.name==i.name).amount+i.amount:this.ingredients.push(i)
         }
+        //Una vez esto se debera volvera a ejecutar el evento con el emitter
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 
-    deleteIngredient(index: number) {
-        this.ingredients.splice(index, 1);
+    dropIngredient(index:number){
+        this.ingredients.splice(index,1);
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
+
+    updateIngredient(index: number, ingredient: Ingredient){
+        this.ingredients[index] = ingredient;
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 }
