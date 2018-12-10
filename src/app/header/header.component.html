@@ -16,7 +16,7 @@
           <div class="dropdown-item" style="cursor: pointer;">Fetch Data</div>
         </div>
       </li>
-      <li class="nav-item"><a style="cursor: pointer;" class="nav-link" routerLink="/sigin">Login</a></li>
+      <li class="nav-item"><a style="cursor: pointer;" class="nav-link" (click)="log()">{{authService.isloggedIn == false ? 'LogIn' : 'LogOut'}}</a></li>
     </ul>
   </div>
 </nav>

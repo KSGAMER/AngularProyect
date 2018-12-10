@@ -9,7 +9,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { SigninComponent } from './auth/signin/signin.component';
 const routes: Routes = [
     {
-        path:'', redirectTo:'/recipes', pathMatch:'full'
+        path:'', redirectTo:'/sigin', pathMatch:'full'
     },
     {
         path: 'sigin', component: SigninComponent

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  private isloggedIn = false;
+  public isloggedIn = false;
 
   login(email: string, password: string): boolean {
     if(email == "luis@gmail.com" && password == "12345") {
@@ -19,5 +19,9 @@ export class AuthService {
 
   isUserLoggedIn() {
     return this.isloggedIn;
+  }
+
+  isUserLoggedOut() {
+    return this.isloggedIn = false;
   }
 }

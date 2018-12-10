@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { AuthService } from '../guards/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,7 @@ import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   //@Output() featureSelected = new EventEmitter<string>();
-  constructor() { }
+  constructor(private authService: AuthService, private route: Router) { }
 
  // onSelect(feature: string){
    // this.featureSelected.emit(feature);
@@ -17,4 +19,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  log() {
+    if(this.authService.isloggedIn == false) {
+      this.route.navigate(['/sigin']);
+    } else {
+      this.authService.isUserLoggedOut();
+    }
+  }
 }
