@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
       this.route.navigate(['/sigin']);
     } else {
       this.authService.isUserLoggedOut();
+      this.route.navigate(['/sigin'])
     }
   }
 }
